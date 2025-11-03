@@ -68,7 +68,6 @@ void buildFrequencyTable(int freq[], const string& filename) {
     }
     file.close();
 
-    cout << "Frequency table built successfully.\n";
 }
 
 // Step 2: Create leaf nodes for each character
@@ -108,8 +107,10 @@ int buildEncodingTree(int nextFree) {
     int secondNode;
 
     while (heap.size > 1) {
+
         firstNode = heap.pop(weightArr);
         secondNode = heap.pop(weightArr);
+
 
         weightArr[nextFree] = weightArr[firstNode] + weightArr[secondNode];
         leftArr[nextFree] = firstNode;
@@ -117,9 +118,8 @@ int buildEncodingTree(int nextFree) {
 
         heap.push(nextFree, weightArr);
         nextFree++;
-
     }
-    cout << "Finished encoding tree.\n";
+
     return heap.pop(weightArr);
 }
 

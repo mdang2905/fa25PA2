@@ -98,8 +98,29 @@ int buildEncodingTree(int nextFree) {
     //    - Set left/right pointers
     //    - Push new parent index back into the heap
     // 4. Return the index of the last remaining node (root)
+    cout << "Created encoding tree.\n";
+    MinHeap heap;
+    for (int i = 0; i < nextFree; ++i) {
+        heap.push(i, weightArr);
+    }
 
-    return -1; // placeholder
+    int firstNode;
+    int secondNode;
+
+    while (heap.size > 1) {
+        firstNode = heap.pop(weightArr);
+        secondNode = heap.pop(weightArr);
+
+        weightArr[nextFree] = weightArr[firstNode] + weightArr[secondNode];
+        leftArr[nextFree] = firstNode;
+        rightArr[nextFree] = secondNode;
+
+        heap.push(nextFree, weightArr);
+        nextFree++;
+
+    }
+    cout << "Finished encoding tree.\n";
+    return heap.pop(weightArr);
 }
 
 // Step 4: Use an STL stack to generate codes

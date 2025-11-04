@@ -106,11 +106,11 @@ int buildEncodingTree(int nextFree) {
     int firstNode;
     int secondNode;
 
+    // pops two smallest nodes, add weights and assign to new parent node,
+    // assign old two nodes to leftArr and rightArr, push new parent node
     while (heap.size > 1) {
-
         firstNode = heap.pop(weightArr);
         secondNode = heap.pop(weightArr);
-
 
         weightArr[nextFree] = weightArr[firstNode] + weightArr[secondNode];
         leftArr[nextFree] = firstNode;
@@ -133,6 +133,9 @@ void generateCodes(int root, string codes[]) {
     stack<pair<int, string>> codeStack;
     codeStack.push({root, ""});
 
+    // stack, each item is made up of node and code
+    // if leaf, record code
+    // if right child, add "1" to code, if left child, add "0" to code
     while (!codeStack.empty()) {
         auto [node, code] = codeStack.top();
         codeStack.pop();
